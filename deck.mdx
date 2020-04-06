@@ -18,7 +18,7 @@ import Grid from './components/grid'
 
 ---
 
-<Image src="images/graphql.png" size="contain" />
+<Image src="images/GRAPHQL.png" size="contain" />
 
 ```notes
 Something I wanted to share
@@ -56,35 +56,44 @@ But seriously, I will show you how they work and why
 # Arrays
 
 ---
-export default Code
 
-```javascript Arrays
+<Code>
+
+```js Arrays
 const arr = [1, 2, 3];
 for (let x of arr) {
-  console.log(x);
+  console.log(x)
 }
 ```
 
----
-export default Code
+</Code>
 
-```javascript
+---
+
+<Code>
+
+```js
 const arr = [1, 2, 3];
 ```
-```javascript Arrays
+```js Arrays
 [...arr];
 ```
 
+</Code>
+
 ---
-export default Code
+
+<Code>
 
 ```
 const arr = [1, 2, 3];
 ```
-```javascript Arrays
+```js Arrays
 [a, b, c] = arr;
 a;
 ```
+
+</Code>
 
 ---
 
@@ -101,9 +110,10 @@ The real basis for Arrays, maps, etc
 # Let's make our own
 
 ---
-export default Code
 
-```javascript A custom iterator
+<Code>
+
+```js A custom iterator
 let curr = 10;
 const it = {
   [Symbol.iterator]: () => ({
@@ -114,10 +124,13 @@ const it = {
 }
 ```
 
----
-export default Code
+</Code>
 
-```javascript
+---
+
+<Code>
+
+```js
 let curr = 10;
 const it = {
   [Symbol.iterator]: () => ({
@@ -127,16 +140,19 @@ const it = {
   }),
 }
 ```
-```javascript for loop
+```js for loop
 for (let x of it) {
   console.log(x)
 }
 ```
 
----
-export default Code
+</Code>
 
-```javascript
+---
+
+<Code>
+
+```js
 let curr = 10;
 const it = {
   [Symbol.iterator]: () => ({
@@ -146,14 +162,17 @@ const it = {
   }),
 }
 ```
-```javascript spreads
+```js spreads
 [...it];
 ```
 
----
-export default Code
+</Code>
 
-```javascript
+---
+
+<Code>
+
+```js
 let curr = 10;
 const it = {
   [Symbol.iterator]: () => ({
@@ -163,10 +182,12 @@ const it = {
   }),
 }
 ```
-```javascript destructuring
+```js destructuring
 const [a, b, c] = it;
 a;
 ```
+
+</Code>
 
 ---
 
@@ -176,10 +197,12 @@ a;
 That's cool, but why would I wanna make my own iterators?
 ```
 
----
-export default Code
 
-```javascript lazy
+---
+
+<Code>
+
+```js lazy
 let curr = 10;
 const it = {
   [Symbol.iterator]: () => ({
@@ -193,10 +216,13 @@ const [a, b, c] = it;
 a;
 ```
 
----
-export default Code
+</Code>
 
-```javascript infinite lists 🤯
+---
+
+<Code>
+
+```js infinite lists 🤯
 let curr = 1;
 const it = {
   [Symbol.iterator]: () => ({
@@ -209,7 +235,10 @@ const [a, b, c] = it;
 a;
 ```
 
+</Code>
+
 ---
+
 # Cool.
 
 ---
@@ -219,9 +248,10 @@ a;
 <img src='images/generator.png' />
 
 ---
-export default Code
 
-```javascript Generators
+<Code>
+
+```js Generators
 function* g() {
   for(let i = 1; true; i++) {
     yield i;
@@ -231,7 +261,10 @@ const [a, b, c, d, e, f, _, h, i, j, k] = g();
 k;
 ```
 
+</Code>
+
 ---
+
 
 # But Pranay
 You promised us something useful.
@@ -250,12 +283,12 @@ beautiful code 😍
 
 ---
 
-export default Code
+<Code>
 
 ```
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 ```
-```javascript sleepy lists 😴
+```js sleepy lists 😴
 let curr = 10;
 const it = {
   [Symbol.asyncIterator]: () => ({
@@ -266,11 +299,14 @@ const it = {
   }),
 }
 ```
+
+</Code>
 
 ---
-export default Code
 
-```javascript
+<Code>
+
+```js
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let curr = 10;
 const it = {
@@ -282,7 +318,7 @@ const it = {
   }),
 }
 ```
-```javascript for loop
+```js for loop
 ;(async () => {
   for await (let x of it) {
     console.log(`${Date.now()} - ${x}`);
@@ -290,7 +326,10 @@ const it = {
 })();
 ```
 
+</Code>
+
 ---
+
 # Okay, now that's cool.
 
 ---
@@ -298,12 +337,13 @@ const it = {
 There's more
 
 ---
-export default Code
 
-```javascript
+<Code>
+
+```js
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 ```
-```javascript async + generators 🤯
+```js async + generators 🤯
 async function* f() {
   for(let i = 1; true; i++) {
     await sleep(1000);
@@ -317,7 +357,10 @@ async function* f() {
 })();
 ```
 
+</Code>
+
 ---
+
 # 🤮
 
 ```notes
@@ -330,16 +373,17 @@ using `for` loops; not really functional
 # Polling
 
 ---
-export default Code
 
-```javascript
+<Code>
+
+```js
 const fetch = require('node-fetch');
 const isssPosition = () => fetch('http://api.open-notify.org/iss-now.json').then(r => r.json()).then(({iss_position}) => iss_position)
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 const distance = (a, b) => Math.sqrt((b.latitude-a.latitude)**2 + (b.longitude - a.longitude)**2)
 ```
 
-```javascript Polling
+```js Polling
 async function* trackISS () {
     while (true) {
         const now = await isssPosition();
@@ -355,14 +399,18 @@ async function* trackISS () {
 })();
 ```
 
+</Code>
+
 ---
+
 # Cool.
 But you said it'd be functional 🤔
 
 ---
-export default Code
 
-```javascript infinite
+<Code>
+
+```js infinite
 async function* infinite() {
   while (true) {
     yield;
@@ -370,10 +418,14 @@ async function* infinite() {
 }
 ```
 
----
-export default Code
+</Code>
 
-```javascript map
+---
+
+
+<Code>
+
+```js map
 async function* map(f, it) {
   for await (const v of it) {
     yield f(v)
@@ -381,13 +433,17 @@ async function* map(f, it) {
 }
 ```
 
----
-export default Code
+</Code>
 
-```javascript
+---
+
+
+<Code>
+
+```js
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 ```
-```javascript delay
+```js delay
 async function* delay(ms, it) {
   for await (const v of it) {
     await sleep(ms);
@@ -396,10 +452,14 @@ async function* delay(ms, it) {
 }
 ```
 
----
-export default Code
+</Code>
 
-```javascript
+---
+
+
+<Code>
+
+```js
 const fetch = require('node-fetch');
 const issPosition = () => fetch('http://api.open-notify.org/iss-now.json').then(r => r.json()).then(({iss_position}) => iss_position)
 const sleep = ms => new Promise(r => setTimeout(r, ms))
@@ -439,14 +499,18 @@ async function* pairwise(it) {
   }
 }
 ```
-```javascript functional polling
+```js functional polling
 // Live demo time!
 ```
 
----
-export default Code
+</Code>
 
-```javascript shiksha
+---
+
+
+<Code>
+
+```js shiksha
 const fetch = require('node-fetch');
 const issPosition = () => fetch('http://api.open-notify.org/iss-now.json').then(r => r.json()).then(({iss_position}) => iss_position)
 
@@ -455,7 +519,10 @@ const { consume, take, map, delay, infinite } = require('shiksha');
 await consume(take(5, map(issPosition, delay(1000, infinite()))))
 ```
 
+</Code>
+
 ---
+
 # Pranay
 Can I hire you?
 
